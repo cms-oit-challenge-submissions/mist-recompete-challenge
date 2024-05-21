@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mist-recompete-challenge"
+version = "0.1.0"
+description = ""
+authors = ["Pat Sier <patrick.sier@cms.hhs.gov>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+urwid = "^2.6.11"
+paramiko = "^3.4.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.1"
+ruff = "^0.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,5 @@
+Port 22
+PasswordAuthentication yes
+AllowUsers mist
+PrintMotd no
+PrintLastLog no
