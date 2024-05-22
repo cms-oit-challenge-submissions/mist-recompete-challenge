@@ -36,22 +36,19 @@ While submitters aren't limited to any specific form of testing,
   and so functional tests that screen-scrape the provided application's terminal interface over an SSH connection
   are expected to be a major or even primary component of the delivered solution.
 
-### Requirements
+## Requirements
 
-The sample application has the following requirements,
-  and the delivered solution should ensure they are being met:
-
-- Users must be able to create, edit, and delete records.
-- Updating records should modify their displayed quantity.
-- Users must be able to select records for check out.
-- Checking out items must update their quantity.
-- Subtotals and the total cost should display in check out.
-- Users must not be able to check out more items than are available.
-- Screen must display the total cost for items to be checked out.
+Documentation for all requirements including any change requests is included in the [`./requirements` directory](./requirements)
 
 ## Building and Running the Application
 
-Submitters can build and run the container with tools like Docker or Podman using the `Dockerfile` and application in this repository with the following commands:
+Submitters can use the pre-built container with tools like Docker or Podman through the published image:
+
+```
+podman run -p 2222:22 -d ghcr.io/cms-oit-challenge-submissions/mist-recompete-challenge:latest
+```
+
+Submitters can also build and run the container using the `Dockerfile` and application in this repository with the following commands:
 
 ```
 podman build -t mist-challenge .
