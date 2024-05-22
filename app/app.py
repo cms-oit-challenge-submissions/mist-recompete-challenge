@@ -267,7 +267,7 @@ class InventoryManager:
         quantity = int(self.quantity_field.edit_text)
         price = float(self.price_field.edit_text)
         self.c.execute(
-            f"INSERT INTO inventory (name, quantity, price) VALUES ({name}, {quantity}, {price})",
+            f"INSERT INTO inventory (name, quantity, price) VALUES ('{name}', {quantity}, {price})",
         )
         self.conn.commit()
         self.items = self.load_items()
