@@ -45,7 +45,7 @@ Documentation for all requirements including any change requests is included in 
 Submitters can use the pre-built container with tools like Docker or Podman through the published image:
 
 ```
-podman run -p 2222:22 -d ghcr.io/cms-oit-challenge-submissions/mist-recompete-challenge:latest
+podman run -p 2222:22 -d ghcr.io/cms-oit-challenge-submissions/mist-recompete-challenge:change-request
 ```
 
 Submitters can also build and run the container using the `Dockerfile` and application in this repository with the following commands:
