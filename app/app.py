@@ -55,8 +55,8 @@ class InventoryManager:
             urwid.Pile(
                 [
                     urwid.Text("Welcome to the Inventory Manager!\n\n"),
-                    urwid.Button("Manage inventory", on_press=self.manage_inventory),
                     urwid.Button("Check out", on_press=self.checkout_screen),
+                    urwid.Button("Manage inventory", on_press=self.manage_inventory),
                     urwid.Button("Quit", on_press=self.exit_program),
                 ]
             )
@@ -67,7 +67,7 @@ class InventoryManager:
 
         checkout_items = [
             urwid.Text(
-                f"{item['item'].name}: {item['quantity']} - ${item['price'] * item['quantity']:.2f}"
+                f"(${item['price'] * item['quantity']:.3f}) - {item['quantity']}: {item['item'].name}"
             )
             for item in self.checkout_items
         ]
@@ -88,30 +88,34 @@ class InventoryManager:
 
         self.view.body = urwid.Pile(
             [
-                urwid.Columns(
-                    [
-                        (
-                            "weight",
-                            1,
-                            urwid.LineBox(
-                                urwid.ListBox(urwid.SimpleFocusListWalker(items))
+                (
+                    "flow",
+                    urwid.Columns(
+                        [
+                            (
+                                "weight",
+                                1,
+                                urwid.Button(
+                                    "Complete check out",
+                                    on_press=self.complete_checkout,
+                                ),
                             ),
-                        ),
-                        (
-                            "weight",
-                            1,
-                            urwid.LineBox(
-                                urwid.ListBox(
-                                    urwid.SimpleFocusListWalker(checkout_items)
-                                )
+                            (
+                                "weight",
+                                1,
+                                urwid.Button(
+                                    "Check out item",
+                                    on_press=self.enter_checkout_item_quantity,
+                                ),
                             ),
-                        ),
-                    ]
+                        ]
+                    ),
                 ),
                 (
                     "flow",
                     urwid.Columns(
                         [
+                            ("weight", 1, urwid.Text(f"Total: ${total_cost:.3f}")),
                             (
                                 "weight",
                                 1,
@@ -122,32 +126,28 @@ class InventoryManager:
                                     ]
                                 ),
                             ),
-                            ("weight", 1, urwid.Text(f"Total: ${total_cost:.2f}")),
                         ]
                     ),
                 ),
-                (
-                    "flow",
-                    urwid.Columns(
-                        [
-                            (
-                                "weight",
-                                1,
-                                urwid.Button(
-                                    "Check out item",
-                                    on_press=self.enter_checkout_item_quantity,
-                                ),
+                urwid.Columns(
+                    [
+                        (
+                            "weight",
+                            1,
+                            urwid.LineBox(
+                                urwid.ListBox(
+                                    urwid.SimpleFocusListWalker(checkout_items)
+                                )
                             ),
-                            (
-                                "weight",
-                                1,
-                                urwid.Button(
-                                    "Complete check out",
-                                    on_press=self.complete_checkout,
-                                ),
+                        ),
+                        (
+                            "weight",
+                            1,
+                            urwid.LineBox(
+                                urwid.ListBox(urwid.SimpleFocusListWalker(items))
                             ),
-                        ]
-                    ),
+                        ),
+                    ]
                 ),
             ]
         )
@@ -254,10 +254,10 @@ class InventoryManager:
             urwid.Pile(
                 [
                     response,
-                    self.name_field,
-                    self.quantity_field,
-                    self.price_field,
                     bottom_controls,
+                    self.name_field,
+                    self.price_field,
+                    self.quantity_field,
                 ]
             )
         )
